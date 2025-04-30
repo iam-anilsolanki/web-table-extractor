@@ -23,9 +23,9 @@ if url:
         if not tables:
             st.warning("⚠️ No tables found on the page.")
         else:
-            # Table selection
+            # Table selection (count starts from 1)
             st.markdown(f"✅ Found **{len(tables)}** tables.")
-            table_index = st.selectbox("📋 Select Table Number", options=list(range(len(tables))), format_func=lambda x: f"Table {x}")
+            table_index = st.selectbox("📋 Select Table Number", options=list(range(len(tables))), format_func=lambda x: f"Table {x + 1}")
 
             # Load selected table into DataFrame
             df = pd.read_html(StringIO(str(tables[table_index])))[0]
@@ -33,7 +33,7 @@ if url:
 
             # Download as CSV
             csv = df.to_csv(index=False).encode('utf-8')
-            st.download_button(label="📥 Download CSV", data=csv, file_name=f"table_{table_index}.csv", mime='text/csv')
+            st.download_button(label="📥 Download CSV", data=csv, file_name=f"table_{table_index + 1}.csv", mime='text/csv')
 
     except Exception as e:
         st.error(f"❌ Error: {e}")
