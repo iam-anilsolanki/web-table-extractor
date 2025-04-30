@@ -1,0 +1,5 @@
+streamlit
+gradio
+pandas
+requests
+beautifulsoup4
